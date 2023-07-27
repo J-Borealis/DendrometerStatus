@@ -1,18 +1,16 @@
-##########################################################
-#   Sort collections in ascending battery voltage order  #
-##########################################################
+#######################################
+#   List all collections in database  #
+#######################################
 
 
 # Import modules
 import collections
 import smtplib
 from pymongo import MongoClient
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
 
 # Specify MongoDB conenction details
-uri = "mongodb+srv://" #Credentials
+uri = "your_uri"
 database = 'UBC_Dendrometer'
 
 # Create a new client and connect to the server
@@ -26,15 +24,9 @@ try:
 except Exception as e:
     print(e)
 
-# We will add report content to these variable
-report = []
-first_line = ''
-new_line = ''
-unsorted_list = []
-
+# Get collection names in database
 collections = db.list_collection_names()
 
-
-# Create a while loop to iterate for each collection
+# Print each collection name
 for collection in collections:
     print(collection)
