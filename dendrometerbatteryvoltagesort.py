@@ -30,8 +30,6 @@ except Exception as e:
 
 # We will add report content to these variable
 report = []
-first_line = ''
-new_line = ''
 unsorted_list = []
 
 # Create a while loop to iterate for each collection
