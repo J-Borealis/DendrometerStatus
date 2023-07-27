@@ -42,9 +42,11 @@ while i < 73:
 
     # Increment the dendrometer number
     i += 1
-
+  
+# Check the current local time
 current_time = time.strftime('%Y-%m-%d %H:%M:%S')
 
+# Write the time into a text file
 with open('data_download_tracker.txt', 'w') as txtfile:
 
     txtfile.write(f"Data was last downloaded: {current_time}\n\n")
