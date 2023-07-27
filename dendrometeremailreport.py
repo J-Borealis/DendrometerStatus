@@ -37,7 +37,6 @@ Timestamp_column = 'Timestamp.time_local'
 
 # We will add report content to these variables
 report = []
-first_line = ''
 new_line = ''
 
 # Print last data download time from text file record
@@ -74,7 +73,7 @@ while i < 73:
         # Iterate through every row in file until last row
         for row in reader:
 
-            # Store the timestamp from the last row in the last_entry variable
+            # Store the last data information in each variable
             last_entry_id = row[id_column]
             last_entry_packet = row[Packet_column]
             last_entry_timestamp = row[Timestamp_column]
@@ -83,7 +82,7 @@ while i < 73:
     collection = db[collection_name]
     last_document = collection.find_one(sort=[('_id', -1)])
 
-    # Compare the two timestamp.time_local values!
+    # Compare the values from the downloaded csv files to the data on the database (_id, Packet.Number, Timestamp.time_local)
     if last_document is not None:
         if last_entry_id == str(last_document['_id']) and last_entry_packet == str(last_document['Packet']['Number']) and last_entry_timestamp == str(last_document['Timestamp']['time_local']):
             new_line += f"## Warning: Data has not been updated since last download. ##\n"
@@ -92,6 +91,7 @@ while i < 73:
             pass
     else:
         new_line += "No data found in MongoDB for time comparison.\n"
+        
     # Check Alignment
     if last_document['AS5311']['Alignment'] == "Green":
         #new_line += f"Alignment is Green.\n"
